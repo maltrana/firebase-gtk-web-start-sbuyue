@@ -24,9 +24,23 @@ var rsvpListener = null;
 var guestbookListener = null;
 
 // Add Firebase project configuration object here
-// var firebaseConfig = {};
 
-// firebase.initializeApp(firebaseConfig);
+// esto me lo dio al montar la app web::
+// Your web app's Firebase configuration
+
+ var firebaseConfig = {
+    apiKey: "AIzaSyBmrPJXyJSFoqUI-Pk5V6c5vZiX-vvvV10",
+    authDomain: "fir-codelab-gdgasturias.firebaseapp.com",
+    databaseURL: "https://fir-codelab-gdgasturias.firebaseio.com",
+    projectId: "fir-codelab-gdgasturias",
+    storageBucket: "fir-codelab-gdgasturias.appspot.com",
+    messagingSenderId: "903232176647",
+    appId: "1:903232176647:web:98d0a770b440983f37e0a2"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
 
 // FirebaseUI config
 const uiConfig = {
