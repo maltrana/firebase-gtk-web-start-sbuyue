@@ -15,6 +15,8 @@ const guestbookContainer = document.getElementById('guestbook-container');
 
 const form = document.getElementById('leave-message');
 const input = document.getElementById('message');
+const url = document.getElementById('url');
+
 const guestbook = document.getElementById('guestbook');
 const numberAttending = document.getElementById('number-attending');
 const rsvpYes = document.getElementById('rsvp-yes');
@@ -99,6 +101,7 @@ form.addEventListener("submit", (e) => {
    // Write a new message to the database collection "guestbook"
    firebase.firestore().collection("guestbook").add({
       text: input.value,
+      url: url.value,
       timestamp: Date.now(),
       name: firebase.auth().currentUser.displayName,
       userId: firebase.auth().currentUser.uid
@@ -106,6 +109,7 @@ form.addEventListener("submit", (e) => {
  
    // clear message input field
    input.value = ""; 
+   url.value = ""; 
    
    // Return false to avoid redirect
    return false;
@@ -123,7 +127,7 @@ firebase.firestore().collection("guestbook")
        snaps.forEach((doc) => {
          // Create an HTML entry for each document and add it to the chat
          const entry = document.createElement("p");
-         entry.textContent =  doc.data().name + " : " + doc.data().text;
+         entry.innerHTML =  doc.data().name + " : " + doc.data().text+' <a href="'+ doc.data().url+'" target="_blank">'+ doc.data().url+'</a>';
          guestbook.appendChild(entry);
    });
 });
