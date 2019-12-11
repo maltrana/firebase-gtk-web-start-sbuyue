@@ -47,7 +47,11 @@ const uiConfig = {
   credentialHelper: firebaseui.auth.CredentialHelper.NONE,
   signInOptions: [
     // Email / Password Provider.
-    firebase.auth.EmailAuthProvider.PROVIDER_ID
+    {
+      provider:firebase.auth.EmailAuthProvider.PROVIDER_ID,
+       defaultCountry: 'es',
+    }
+
   ],
   callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl){
@@ -63,11 +67,11 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 // Listen to RSVP button clicks
 startRsvpButton.addEventListener("click",
  () => {
-   
-     if (firebase.auth().currentUser) {
+    if (firebase.auth().currentUser) {
       // User is signed in; allows user to sign out
       firebase.auth().signOut();
     } else {
+      firebase.auth().languageCode = "es";
       // No user is signed in; allows user to sign in
       ui.start("#firebaseui-auth-container", uiConfig);
     }
@@ -81,7 +85,7 @@ firebase.auth().onAuthStateChanged((user)=> {
     guestbookContainer.style.display = "block";
   }
   else {
-    startRsvpButton.textContent = "Login";
+    startRsvpButton.textContent = "Entrar";
     guestbookContainer.style.display = "none";
   }
 });
